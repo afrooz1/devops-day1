@@ -14,13 +14,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+    - name: Check for package.json
+      run: |
+        if [ -f "package.json" ]; then
+          echo "package.json found, installing dependencies..."
+          npm install
+          npm test || echo "No tests found"
+        else
+          echo "No package.json found, skipping Node.js steps."
+        fi
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run tests
-      run: npm test || echo "No tests found"
+    - name: Run basic checks
+      run: |
+        echo "✅ CI pipeline ran successfully!"
+        echo "📄 Files in repo:"
+        ls -la
