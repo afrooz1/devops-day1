@@ -1,1 +1,2 @@
-# devops-day1
+# DevOps Journey
+This repo will track my DevOps learning journey.
